@@ -1,4 +1,4 @@
-// This is your Prisma schema file,
+// This is your Prisma schema file
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
@@ -31,4 +31,26 @@ model Session {
   emailVerified Boolean?  @default(false)
   refreshToken        String?
   refreshTokenExpires DateTime?
+}
+
+// --- TUS NUEVOS MODELOS PARA AFILIADOS ---
+
+model Affiliate {
+  id            Int       @id @default(autoincrement())
+  name          String
+  email         String    @unique
+  commissionRate Float    // Ej: 0.10 para 10%
+  couponCode    String    @unique
+  createdAt     DateTime  @default(now())
+  commissions   Commission[]
+}
+
+model Commission {
+  id            Int       @id @default(autoincrement())
+  orderId       String    // ID del pedido de Shopify
+  amount        Float     // Monto total de la comisión
+  status        String    // "PENDING", "PAID"
+  affiliate     Affiliate @relation(fields: [affiliateId], references: [id])
+  affiliateId   Int
+  createdAt     DateTime  @default(now())
 }
