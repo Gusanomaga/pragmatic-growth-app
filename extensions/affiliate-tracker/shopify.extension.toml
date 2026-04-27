@@ -1,0 +1,16 @@
+name = "affiliate-tracker"
+type = "web_pixel_extension"
+uid = "98abf6e4-5075-4aac-8ecd-f454dc4585a7b34de535"
+
+runtime_context = "strict"
+
+[settings]
+type = "object"
+
+[settings.fields.accountID]
+name = "Account ID"
+description = "Account ID"
+type = "single_line_text_field"
+validations =  [
+  { name = "min", value = "1" }
+]

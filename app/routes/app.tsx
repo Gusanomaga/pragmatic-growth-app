@@ -1,11 +1,12 @@
 import type { HeadersFunction, LoaderFunctionArgs } from "react-router";
 import { Outlet, useLoaderData, useRouteError } from "react-router";
 import { boundary } from "@shopify/shopify-app-react-router/server";
+// IMPORTA NavMenu
 import { AppProvider } from "@shopify/shopify-app-react-router/react";
-// 1. IMPORTA EL PROVIDER Y LOS ESTILOS DE POLARIS
+import { NavMenu } from "@shopify/app-bridge-react";
 import { AppProvider as PolarisProvider } from "@shopify/polaris";
 import "@shopify/polaris/build/esm/styles.css";
-import translations from "@shopify/polaris/locales/en.json"; // Puedes cambiar a es.json si prefieres
+import translations from "@shopify/polaris/locales/en.json";
 
 import { authenticate } from "../shopify.server";
 
@@ -18,15 +19,15 @@ export default function App() {
   const { apiKey } = useLoaderData<typeof loader>();
 
   return (
-    // 2. ENVUELVE TODO EN POLARIS PROVIDER
     <PolarisProvider i18n={translations}>
-        <AppProvider embedded apiKey={apiKey}>
-          <s-app-nav>
-            <s-link href="/app">Home</s-link>
-            <s-link href="/app/additional">Additional page</s-link>
-          </s-app-nav>
-          <Outlet />
-        </AppProvider>
+      <AppProvider embedded apiKey={apiKey}>
+        {/* REEMPLAZA s-app-nav POR NavMenu */}
+        <NavMenu>
+          <a href="/app" rel="home">Home</a>
+          <a href="/app/additional">Additional page</a>
+        </NavMenu>
+        <Outlet />
+      </AppProvider>
     </PolarisProvider>
   );
 }
