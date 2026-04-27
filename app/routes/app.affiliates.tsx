@@ -1,7 +1,7 @@
 import { redirect, type ActionFunctionArgs } from "react-router";
 import { useLoaderData, Form } from "react-router";
 import { Page, Layout, Card, TextField, Button, DataTable, Text, BlockStack } from "@shopify/polaris";
-import prisma from "../db.server";
+import { prisma } from "../db.server";
 
 // 1. CARGAR DATOS
 export async function loader() {
